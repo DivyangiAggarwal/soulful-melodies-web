@@ -30,7 +30,7 @@ const Landing = () => {
           backgroundImage: `url('/lovable-uploads/91716218-fba1-44cc-b62f-410acd800072.png')`,
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/70 via-purple-800/50 to-indigo-900/70" />
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-900/70 via-yellow-800/50 to-saffron-900/70" />
       </div>
 
       {/* Content */}
@@ -39,10 +39,10 @@ const Landing = () => {
         <header className="p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-saffron-400 to-amber-500 rounded-full flex items-center justify-center">
                 <span className="text-white font-bold text-lg">♪</span>
               </div>
-              <span className="text-yellow-300 font-playfair text-lg font-semibold">
+              <span className="text-saffron-300 font-playfair text-lg font-semibold">
                 Sooryagayathri
               </span>
             </div>
@@ -52,7 +52,7 @@ const Landing = () => {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center hover:bg-orange-700 transition-colors"
+                className="w-10 h-10 bg-saffron-600 text-white rounded-full flex items-center justify-center hover:bg-saffron-700 transition-colors"
               >
                 <Facebook className="w-5 h-5" />
               </a>
@@ -60,7 +60,7 @@ const Landing = () => {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center hover:bg-orange-700 transition-colors"
+                className="w-10 h-10 bg-saffron-600 text-white rounded-full flex items-center justify-center hover:bg-saffron-700 transition-colors"
               >
                 <Instagram className="w-5 h-5" />
               </a>
@@ -68,7 +68,7 @@ const Landing = () => {
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center hover:bg-orange-700 transition-colors"
+                className="w-10 h-10 bg-saffron-600 text-white rounded-full flex items-center justify-center hover:bg-saffron-700 transition-colors"
               >
                 <Youtube className="w-5 h-5" />
               </a>
@@ -82,7 +82,7 @@ const Landing = () => {
             <h1 className="text-5xl md:text-7xl font-playfair font-bold text-white mb-4 animate-fade-in">
               Soorya Gayathri
             </h1>
-            <p className="text-xl md:text-2xl text-yellow-300 mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <p className="text-xl md:text-2xl text-saffron-300 mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
               Traditional Bhajan Singer
             </p>
             <p className="text-lg text-white/80 mb-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
@@ -95,8 +95,8 @@ const Landing = () => {
         <div className="p-6">
           <div className="flex flex-col md:flex-row items-center justify-between">
             {/* Next Concert */}
-            <div className="bg-black/30 backdrop-blur-sm rounded-lg p-4 mb-4 md:mb-0 border border-white/20">
-              <h3 className="text-orange-400 font-semibold mb-2 flex items-center">
+            <div className="bg-black/30 backdrop-blur-sm rounded-lg p-4 mb-4 md:mb-0 border border-amber-300/30">
+              <h3 className="text-saffron-400 font-semibold mb-2 flex items-center">
                 <Calendar className="w-4 h-4 mr-2" />
                 Next Concert
               </h3>
@@ -107,7 +107,7 @@ const Landing = () => {
             {/* Enter Site Button */}
             <Button
               onClick={handleEnterSite}
-              className="bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-600 hover:to-orange-700 text-white font-semibold px-8 py-3 rounded-lg border border-white/20 transition-all duration-300 hover:scale-105"
+              className="bg-gradient-to-r from-saffron-500 to-amber-600 hover:from-saffron-600 hover:to-amber-700 text-white font-semibold px-8 py-3 rounded-lg border border-amber-300/30 transition-all duration-300 hover:scale-105"
             >
               Enter Site
             </Button>
