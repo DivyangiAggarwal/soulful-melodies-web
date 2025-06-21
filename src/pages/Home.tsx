@@ -3,21 +3,10 @@ import { useState, useEffect } from 'react';
 import { Calendar, Clock, MapPin, Play } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import LatestReleaseModal from '@/components/LatestReleaseModal';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 const Home = () => {
-  const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowModal(true);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-background to-saffron-50">
       <Header />
@@ -140,11 +129,6 @@ const Home = () => {
       </main>
 
       <Footer />
-      
-      <LatestReleaseModal 
-        isOpen={showModal} 
-        onClose={() => setShowModal(false)} 
-      />
     </div>
   );
 };
