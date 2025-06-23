@@ -1,12 +1,13 @@
 
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Facebook, Instagram, Youtube, Calendar, Clock, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Calendar, Clock, MapPin, ArrowUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import LatestReleaseModal from '@/components/LatestReleaseModal';
 
 const Landing = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,12 +15,28 @@ const Landing = () => {
       setShowModal(true);
     }, 1000);
 
-    return () => clearTimeout(timer);
+    const scrollTimer = setTimeout(() => {
+      setShowScrollIndicator(true);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(scrollTimer);
+    };
   }, []);
 
-  const handleEnterSite = () => {
-    navigate('/home');
-  };
+  useEffect(() => {
+    let scrollCount = 0;
+    const handleScroll = () => {
+      scrollCount++;
+      if (scrollCount >= 3) {
+        navigate('/home');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [navigate]);
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -78,54 +95,53 @@ const Landing = () => {
 
         {/* Main Content - Positioned to avoid face */}
         <div className="flex-1 flex flex-col justify-end px-4 sm:px-6 pb-8 sm:pb-12 lg:pb-16">
-          {/* Main Title - Positioned at top right to avoid face */}
+          {/* Main Title and Concert Section - Positioned at top right to avoid face */}
           <div className="absolute top-16 sm:top-20 md:top-24 right-4 sm:right-6 md:right-8 lg:right-12 xl:right-16 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl text-right">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-2 sm:mb-4 animate-fade-in tracking-wide" style={{fontFamily: 'Playfair Display, serif', textShadow: '3px 3px 6px rgba(0,0,0,0.8)'}}>
               Sooryagayathri
             </h1>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-amber-100 animate-fade-in tracking-wider" style={{ animationDelay: '0.2s', fontFamily: 'Playfair Display, serif', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-amber-100 mb-4 sm:mb-6 animate-fade-in tracking-wider" style={{ animationDelay: '0.2s', fontFamily: 'Playfair Display, serif', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
               Classical Vocalist | Carnatic Music | Bhakti Sangeetham
             </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto w-full space-y-4 sm:space-y-6">
-            {/* Next Concert Card - Glassmorphism effect */}
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 border border-white/20 shadow-2xl">
-              <div className="flex items-center justify-center mb-3 sm:mb-4">
-                <Calendar className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-amber-200" />
-                <h3 className="text-amber-200 font-bold text-lg sm:text-xl" style={{fontFamily: 'Playfair Display, serif'}}>
+            
+            {/* Compact Concert Section */}
+            <div className="bg-white/10 backdrop-blur-md rounded-xl p-3 sm:p-4 border border-white/20 shadow-xl max-w-xs">
+              <div className="flex items-center justify-center mb-2">
+                <Calendar className="w-4 h-4 mr-2 text-amber-200" />
+                <h3 className="text-amber-200 font-bold text-sm" style={{fontFamily: 'Playfair Display, serif'}}>
                   Upcoming Concert
                 </h3>
               </div>
               
               <div className="text-center">
-                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4 px-2" style={{fontFamily: 'Playfair Display, serif'}}>
+                <h2 className="text-sm sm:text-base font-bold text-white mb-2" style={{fontFamily: 'Playfair Display, serif'}}>
                   Margazhi Music Festival 2024
                 </h2>
-                <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-8 md:space-x-12 text-white/90">
-                  <div className="flex items-center text-sm sm:text-base md:text-lg">
-                    <Clock className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-amber-300" />
+                <div className="space-y-1 text-white/90">
+                  <div className="flex items-center justify-center text-xs">
+                    <Clock className="w-3 h-3 mr-1 text-amber-300" />
                     <span>Dec 15, 2024 | 6:30 PM</span>
                   </div>
-                  <div className="flex items-center text-sm sm:text-base md:text-lg">
-                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-amber-300" />
+                  <div className="flex items-center justify-center text-xs">
+                    <MapPin className="w-3 h-3 mr-1 text-amber-300" />
                     <span>Chennai, India</span>
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* Enter Site Button - Glassmorphism effect */}
-            <div className="text-center">
-              <Button
-                onClick={handleEnterSite}
-                className="bg-gradient-to-r from-amber-500/80 via-orange-400/80 to-yellow-500/80 backdrop-blur-sm hover:from-amber-600/90 hover:via-orange-500/90 hover:to-yellow-600/90 text-white font-bold text-base sm:text-lg md:text-xl px-8 sm:px-12 md:px-16 py-4 sm:py-5 md:py-6 rounded-2xl sm:rounded-3xl shadow-2xl transition-all duration-300 hover:scale-105 border border-white/30"
-                style={{fontFamily: 'Playfair Display, serif'}}
-              >
-                Enter Site
-              </Button>
-            </div>
           </div>
+
+          {/* Scroll to Enter Indicator */}
+          {showScrollIndicator && (
+            <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 text-center animate-fade-in">
+              <div className="flex flex-col items-center text-white/80">
+                <ArrowUp className="w-6 h-6 animate-bounce mb-2" />
+                <p className="text-sm font-semibold" style={{fontFamily: 'Playfair Display, serif', textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>
+                  Scroll to Enter Site
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
