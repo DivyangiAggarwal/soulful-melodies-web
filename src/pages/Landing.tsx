@@ -30,7 +30,7 @@ const Landing = () => {
           backgroundImage: `url('/lovable-uploads/91716218-fba1-44cc-b62f-410acd800072.png')`,
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-900/70 via-yellow-800/50 to-saffron-900/70" />
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-900/40 via-yellow-800/30 to-saffron-900/40" />
       </div>
 
       {/* Content */}
@@ -38,13 +38,12 @@ const Landing = () => {
         {/* Header */}
         <header className="p-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-saffron-400 to-amber-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">♪</span>
-              </div>
-              <span className="text-saffron-300 font-playfair text-lg font-semibold">
-                Sooryagayathri
-              </span>
+            <div className="flex items-center">
+              <img
+                src="/lovable-uploads/e6581078-5642-43c0-8ff3-7e5879730c80.png"
+                alt="Sooryagayathri Logo"
+                className="w-16 h-16 object-contain"
+              />
             </div>
             
             <div className="flex items-center space-x-4">
@@ -77,40 +76,53 @@ const Landing = () => {
         </header>
 
         {/* Main Content */}
-        <div className="flex-1 flex items-center justify-center px-6">
-          <div className="text-center max-w-2xl">
-            <h1 className="text-5xl md:text-7xl font-playfair font-bold text-white mb-4 animate-fade-in">
-              Soorya Gayathri
+        <div className="flex-1 flex items-end justify-center px-6 pb-32">
+          <div className="text-center max-w-3xl">
+            <h1 className="text-6xl md:text-8xl font-serif font-bold text-white mb-4 animate-fade-in tracking-wide" style={{fontFamily: 'Georgia, serif'}}>
+              Sooryagayathri
             </h1>
-            <p className="text-xl md:text-2xl text-saffron-300 mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              Traditional Bhajan Singer
-            </p>
-            <p className="text-lg text-white/80 mb-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              Experience the spiritual journey through divine music and devotional melodies
+            <p className="text-xl md:text-2xl text-amber-200 mb-8 animate-fade-in tracking-wider" style={{ animationDelay: '0.2s', fontFamily: 'Georgia, serif' }}>
+              Classical Vocalist | Carnatic Music | Bhakti Sangeetham
             </p>
           </div>
         </div>
 
         {/* Bottom Section */}
         <div className="p-6">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            {/* Next Concert */}
-            <div className="bg-black/30 backdrop-blur-sm rounded-lg p-4 mb-4 md:mb-0 border border-amber-300/30">
-              <h3 className="text-saffron-400 font-semibold mb-2 flex items-center">
-                <Calendar className="w-4 h-4 mr-2" />
-                Next Concert
-              </h3>
-              <p className="text-white text-sm">21 Jun 2025, 7:00 PM</p>
-              <p className="text-white/80 text-sm">Upcoming Event, Virtual Event</p>
+          <div className="max-w-4xl mx-auto">
+            {/* Next Concert Card */}
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 mb-6 border border-amber-300/20 shadow-2xl">
+              <div className="flex items-center justify-center mb-3">
+                <Calendar className="w-5 h-5 mr-2 text-amber-300" />
+                <h3 className="text-amber-300 font-semibold text-lg">Upcoming Concert</h3>
+              </div>
+              
+              <div className="text-center">
+                <h2 className="text-2xl md:text-3xl font-serif font-bold text-white mb-2">
+                  Margazhi Music Festival 2024
+                </h2>
+                <div className="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-8 text-white/90">
+                  <div className="flex items-center">
+                    <Clock className="w-4 h-4 mr-2 text-amber-300" />
+                    <span>Dec 15, 2024 | 6:30 PM</span>
+                  </div>
+                  <div className="flex items-center">
+                    <MapPin className="w-4 h-4 mr-2 text-amber-300" />
+                    <span>Chennai, India</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Enter Site Button */}
-            <Button
-              onClick={handleEnterSite}
-              className="bg-gradient-to-r from-saffron-500 to-amber-600 hover:from-saffron-600 hover:to-amber-700 text-white font-semibold px-8 py-3 rounded-lg border border-amber-300/30 transition-all duration-300 hover:scale-105"
-            >
-              Enter Site
-            </Button>
+            <div className="text-center">
+              <Button
+                onClick={handleEnterSite}
+                className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold text-lg px-12 py-4 rounded-2xl shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-amber-300/30"
+              >
+                Enter Site
+              </Button>
+            </div>
           </div>
         </div>
       </div>
