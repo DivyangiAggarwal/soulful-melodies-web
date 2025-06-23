@@ -28,10 +28,10 @@ const Landing = () => {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url('/lovable-uploads/91716218-fba1-44cc-b62f-410acd800072.png')`,
-          filter: 'contrast(1.1) brightness(1.1) saturate(1.2)',
+          filter: 'contrast(1.2) brightness(1.1) saturate(1.3)',
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-900/30 via-yellow-800/20 to-saffron-900/30" />
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-900/20 via-yellow-800/10 to-saffron-900/20" />
       </div>
 
       {/* Content */}
@@ -43,7 +43,7 @@ const Landing = () => {
               <img
                 src="/lovable-uploads/e6581078-5642-43c0-8ff3-7e5879730c80.png"
                 alt="Sooryagayathri Logo"
-                className="w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 object-contain"
+                className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 object-contain"
               />
             </div>
             
@@ -76,23 +76,21 @@ const Landing = () => {
           </div>
         </header>
 
-        {/* Main Content */}
-        <div className="flex-1 flex items-center justify-center px-4 sm:px-6 pt-8 sm:pt-16">
-          <div className="text-center max-w-4xl">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-2 sm:mb-4 animate-fade-in tracking-wide" style={{fontFamily: 'Playfair Display, serif', textShadow: '2px 2px 4px rgba(0,0,0,0.5)'}}>
+        {/* Main Content - Positioned to avoid face */}
+        <div className="flex-1 flex flex-col justify-end px-4 sm:px-6 pb-8 sm:pb-12 lg:pb-16">
+          {/* Main Title - Positioned at top right to avoid face */}
+          <div className="absolute top-16 sm:top-20 md:top-24 right-4 sm:right-6 md:right-8 lg:right-12 xl:right-16 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl text-right">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-2 sm:mb-4 animate-fade-in tracking-wide" style={{fontFamily: 'Playfair Display, serif', textShadow: '3px 3px 6px rgba(0,0,0,0.8)'}}>
               Sooryagayathri
             </h1>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-amber-200 mb-6 sm:mb-8 animate-fade-in tracking-wider px-4" style={{ animationDelay: '0.2s', fontFamily: 'Playfair Display, serif', textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-amber-100 animate-fade-in tracking-wider" style={{ animationDelay: '0.2s', fontFamily: 'Playfair Display, serif', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
               Classical Vocalist | Carnatic Music | Bhakti Sangeetham
             </p>
           </div>
-        </div>
 
-        {/* Bottom Section */}
-        <div className="p-4 sm:p-6 pb-8 sm:pb-12">
-          <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
-            {/* Next Concert Card */}
-            <div className="bg-gradient-to-r from-amber-800/80 to-orange-800/80 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 border-2 border-amber-400/40 shadow-2xl">
+          <div className="max-w-4xl mx-auto w-full space-y-4 sm:space-y-6">
+            {/* Next Concert Card - Glassmorphism effect */}
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 border border-white/20 shadow-2xl">
               <div className="flex items-center justify-center mb-3 sm:mb-4">
                 <Calendar className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-amber-200" />
                 <h3 className="text-amber-200 font-bold text-lg sm:text-xl" style={{fontFamily: 'Playfair Display, serif'}}>
@@ -117,11 +115,11 @@ const Landing = () => {
               </div>
             </div>
 
-            {/* Enter Site Button */}
+            {/* Enter Site Button - Glassmorphism effect */}
             <div className="text-center">
               <Button
                 onClick={handleEnterSite}
-                className="bg-gradient-to-r from-amber-600 via-orange-500 to-red-600 hover:from-amber-700 hover:via-orange-600 hover:to-red-700 text-white font-bold text-base sm:text-lg md:text-xl px-8 sm:px-12 md:px-16 py-4 sm:py-5 md:py-6 rounded-2xl sm:rounded-3xl shadow-2xl transition-all duration-300 hover:scale-105 border-2 sm:border-3 border-amber-300/50"
+                className="bg-gradient-to-r from-amber-500/80 via-orange-400/80 to-yellow-500/80 backdrop-blur-sm hover:from-amber-600/90 hover:via-orange-500/90 hover:to-yellow-600/90 text-white font-bold text-base sm:text-lg md:text-xl px-8 sm:px-12 md:px-16 py-4 sm:py-5 md:py-6 rounded-2xl sm:rounded-3xl shadow-2xl transition-all duration-300 hover:scale-105 border border-white/30"
                 style={{fontFamily: 'Playfair Display, serif'}}
               >
                 Enter Site
