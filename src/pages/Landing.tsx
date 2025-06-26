@@ -26,7 +26,6 @@ const Landing = () => {
   }, []);
 
   useEffect(() => {
-    let scrollCount = 0;
     let lastScrollY = 0;
     let ticking = false;
 
@@ -37,13 +36,8 @@ const Landing = () => {
           
           // Check if user scrolled up (negative scroll delta)
           if (currentScrollY < lastScrollY && currentScrollY > 50) {
-            scrollCount++;
-            console.log(`Scroll up detected: ${scrollCount}/3`);
-            
-            if (scrollCount >= 3) {
-              console.log('Navigating to home...');
-              navigate('/home');
-            }
+            console.log('Scroll up detected, navigating to home...');
+            navigate('/home');
           }
           
           lastScrollY = currentScrollY;
@@ -58,11 +52,9 @@ const Landing = () => {
     
     // Also add touch event listeners for mobile
     let touchStartY = 0;
-    let touchMoveCount = 0;
 
     const handleTouchStart = (e) => {
       touchStartY = e.touches[0].clientY;
-      touchMoveCount = 0;
     };
 
     const handleTouchMove = (e) => {
@@ -71,15 +63,8 @@ const Landing = () => {
       
       // If user is swiping up (positive delta)
       if (touchDelta < -30) { // Threshold for upward swipe
-        touchMoveCount++;
-        console.log(`Touch swipe up detected: ${touchMoveCount}/3`);
-        
-        if (touchMoveCount >= 3) {
-          console.log('Navigating to home via touch...');
-          navigate('/home');
-        }
-        
-        touchStartY = touchCurrentY; // Reset for next swipe
+        console.log('Touch swipe up detected, navigating to home...');
+        navigate('/home');
       }
     };
 
@@ -194,9 +179,6 @@ const Landing = () => {
                 <ArrowUp className="w-6 h-6 animate-bounce mb-2" />
                 <p className="text-sm font-semibold" style={{fontFamily: 'Playfair Display, serif', textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>
                   Scroll Up to Enter Site
-                </p>
-                <p className="text-xs text-white/60 mt-1" style={{fontFamily: 'Playfair Display, serif', textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>
-                  (3 times)
                 </p>
               </div>
             </div>
