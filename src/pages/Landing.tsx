@@ -27,15 +27,71 @@ const Landing = () => {
 
   useEffect(() => {
     let scrollCount = 0;
+    let lastScrollY = 0;
+    let ticking = false;
+
     const handleScroll = () => {
-      scrollCount++;
-      if (scrollCount >= 3) {
-        navigate('/home');
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY || window.pageYOffset;
+          
+          // Check if user scrolled up (negative scroll delta)
+          if (currentScrollY < lastScrollY && currentScrollY > 50) {
+            scrollCount++;
+            console.log(`Scroll up detected: ${scrollCount}/3`);
+            
+            if (scrollCount >= 3) {
+              console.log('Navigating to home...');
+              navigate('/home');
+            }
+          }
+          
+          lastScrollY = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Also add touch event listeners for mobile
+    let touchStartY = 0;
+    let touchMoveCount = 0;
+
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+      touchMoveCount = 0;
+    };
+
+    const handleTouchMove = (e) => {
+      const touchCurrentY = e.touches[0].clientY;
+      const touchDelta = touchStartY - touchCurrentY;
+      
+      // If user is swiping up (positive delta)
+      if (touchDelta < -30) { // Threshold for upward swipe
+        touchMoveCount++;
+        console.log(`Touch swipe up detected: ${touchMoveCount}/3`);
+        
+        if (touchMoveCount >= 3) {
+          console.log('Navigating to home via touch...');
+          navigate('/home');
+        }
+        
+        touchStartY = touchCurrentY; // Reset for next swipe
+      }
+    };
+
+    // Add touch event listeners for mobile devices
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+    };
   }, [navigate]);
 
   return (
@@ -137,7 +193,10 @@ const Landing = () => {
               <div className="flex flex-col items-center text-white/80">
                 <ArrowUp className="w-6 h-6 animate-bounce mb-2" />
                 <p className="text-sm font-semibold" style={{fontFamily: 'Playfair Display, serif', textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>
-                  Scroll to Enter Site
+                  Scroll Up to Enter Site
+                </p>
+                <p className="text-xs text-white/60 mt-1" style={{fontFamily: 'Playfair Display, serif', textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>
+                  (3 times)
                 </p>
               </div>
             </div>
