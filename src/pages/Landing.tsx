@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Facebook, Instagram, Youtube, Calendar, Clock, MapPin, ArrowUp } from 'lucide-react';
@@ -72,13 +71,13 @@ const Landing = () => {
       if (isNavigating) return;
       
       const touchEndY = e.changedTouches[0].clientY;
-      const touchDelta = touchStartY - touchEndY;
+      const touchDelta = touchStartY - touchEndY; // Positive when swiping up
       const touchDuration = Date.now() - touchStartTime;
       
       console.log('Touch end:', { touchStartY, touchEndY, touchDelta, touchDuration });
       
-      // If user swiped up (negative delta) with sufficient distance and speed
-      if (touchDelta < -50 && touchDuration < 1000) {
+      // If user swiped up (positive delta) with sufficient distance and reasonable speed
+      if (touchDelta > 50 && touchDuration < 1000) {
         console.log('Touch swipe up detected, navigating to home...');
         isNavigating = true;
         navigate('/home');
