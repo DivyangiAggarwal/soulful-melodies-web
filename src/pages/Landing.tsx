@@ -26,56 +26,75 @@ const Landing = () => {
   }, []);
 
   useEffect(() => {
-    let lastScrollY = 0;
-    let ticking = false;
+    let lastScrollY = window.scrollY;
+    let isNavigating = false;
 
     const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY || window.pageYOffset;
-          
-          // Check if user scrolled up (negative scroll delta)
-          if (currentScrollY < lastScrollY && currentScrollY > 50) {
-            console.log('Scroll up detected, navigating to home...');
-            navigate('/home');
-          }
-          
-          lastScrollY = currentScrollY;
-          ticking = false;
-        });
-        ticking = true;
+      if (isNavigating) return;
+      
+      const currentScrollY = window.scrollY;
+      const scrollDelta = lastScrollY - currentScrollY;
+      
+      console.log('Scroll detected:', { currentScrollY, lastScrollY, scrollDelta });
+      
+      // If user scrolled up by at least 10 pixels and we're not at the very top
+      if (scrollDelta > 10 && currentScrollY > 0) {
+        console.log('Scroll up detected, navigating to home...');
+        isNavigating = true;
+        navigate('/home');
+        return;
       }
+      
+      lastScrollY = currentScrollY;
     };
 
-    // Add scroll event listener
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Also add touch event listeners for mobile
+    // Throttled scroll handler
+    let scrollTimeout;
+    const throttledScroll = () => {
+      if (scrollTimeout) return;
+      scrollTimeout = setTimeout(() => {
+        handleScroll();
+        scrollTimeout = null;
+      }, 50);
+    };
+
+    // Touch handling for mobile
     let touchStartY = 0;
+    let touchStartTime = 0;
 
     const handleTouchStart = (e) => {
       touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
+      console.log('Touch start:', touchStartY);
     };
 
-    const handleTouchMove = (e) => {
-      const touchCurrentY = e.touches[0].clientY;
-      const touchDelta = touchStartY - touchCurrentY;
+    const handleTouchEnd = (e) => {
+      if (isNavigating) return;
       
-      // If user is swiping up (positive delta)
-      if (touchDelta < -30) { // Threshold for upward swipe
+      const touchEndY = e.changedTouches[0].clientY;
+      const touchDelta = touchStartY - touchEndY;
+      const touchDuration = Date.now() - touchStartTime;
+      
+      console.log('Touch end:', { touchStartY, touchEndY, touchDelta, touchDuration });
+      
+      // If user swiped up (negative delta) with sufficient distance and speed
+      if (touchDelta < -50 && touchDuration < 1000) {
         console.log('Touch swipe up detected, navigating to home...');
+        isNavigating = true;
         navigate('/home');
       }
     };
 
-    // Add touch event listeners for mobile devices
+    // Add event listeners
+    window.addEventListener('scroll', throttledScroll, { passive: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', throttledScroll);
       window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
     };
   }, [navigate]);
 
